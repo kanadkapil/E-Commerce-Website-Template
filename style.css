@@ -1,0 +1,141 @@
+
+/* https://getbootstrap.com/docs/5.3/components/collapse/#example
+<input type="color" class="form-control form-control-color" value="#CCCCCC">
+data-bs-theme="dark" */
+
+
+/* custom-color 
+for nav and footer color */
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  /* Fallback font for non-supporting browsers */
+}
+
+p {
+  font-size: 25px;
+  font-weight: 350;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  font-weight: 400;
+  text-align:justify ;
+}
+
+.round{
+  border-radius: 50%;
+}
+
+/* font size  */
+
+.bold{
+  font-weight: bolder;
+}
+
+/* colors  */
+
+.custom-color {
+  background-color: #e4ff5c; /* Change this to your desired color */
+}
+/* ratio 1.26 */
+.card-instax {
+  width: 100%;
+  max-width: 500px;
+  /* Default card width for desktop */
+  height: 630px;
+  margin-bottom: auto;
+}
+
+/* ratio 1.15 */
+.card-instax img {
+  width: 100%;
+  max-width: 450px;
+  /* Default card width for desktop */
+  height: 530px;
+  margin: 0 auto;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+/* carousel customization */
+.carousel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.carousel-item {
+  transition: transform 2000ms ease-in-out;
+}
+
+.carousel-inner {
+  width: 100%;
+  height: 360px;
+  overflow: hidden;
+}
+
+.carousel-item {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* custom card settings  */
+
+.card-custom {
+  width: 100%;
+  max-width: 360px;
+  /* Default card width for desktop */
+  height: 390px;
+  margin: 10px auto;
+}
+
+.card-custom img {
+  width: 100%;
+  height: auto;
+}
+
+
+
+/* media query  */
+
+/* ---------------------------------- */
+@media (max-width: 768px) {
+
+  /* Media query for phone view */
+  .card-custom {
+    max-width: 520px;
+    /* Increased card width for mobile */
+    height: 360px;
+    /* Increased card height for mobile */
+  }
+
+/* ratio 1.375 */
+.card-instax {
+  width: 100%;
+  max-width: 500px;
+  height: 550px;
+  margin-bottom: auto;
+}
+
+/* ratio 1.125 */
+.card-instax img {
+  width: 350px;
+  max-width: 450px;
+  height: 400px;
+  margin: 0 auto;
+  padding-top: 20px;
+  padding-bottom: 0px;
+}
+
+}
+/* ------------------------------------- */
+
+
