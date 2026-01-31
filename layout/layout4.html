@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en" data-theme="luxury">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Artisan Shop | Bento Edition</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- DaisyUI CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@4.4.19/dist/full.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <!-- Google Fonts: Inter & Space Grotesk -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+      .bento-font {
+        font-family: "Space Grotesk", sans-serif;
+      }
+      .bento-card {
+        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      }
+      .bento-card:hover {
+        transform: translateY(-5px);
+        box-shadow:
+          0 20px 25px -5px rgb(0 0 0 / 0.1),
+          0 8px 10px -6px rgb(0 0 0 / 0.1);
+      }
+      .gallery-active {
+        outline: 3px solid oklch(var(--p));
+      }
+    </style>
+  </head>
+  <body class="min-h-screen bg-base-200 p-4 md:p-8">
+    <!-- Compact Floating Header -->
+    <header
+      class="navbar bg-base-100/80 backdrop-blur shadow-xl rounded-full mb-8 max-w-7xl mx-auto sticky top-4 z-50"
+    >
+      <div class="flex-1 px-4 text-xl font-bold bento-font tracking-tighter">
+        <span class="text-primary mr-1">/</span>ARTISAN<span class="opacity-30"
+          >PRO</span
+        >
+      </div>
+      <div class="flex-none gap-4 px-4">
+        <!-- Theme Switcher -->
+        <div class="dropdown dropdown-end">
+          <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.172-1.172a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+              />
+            </svg>
+          </div>
+          <ul
+            tabindex="0"
+            class="dropdown-content z-[1] menu p-2 shadow-2xl bg-base-100 rounded-2xl w-52 mt-4 max-h-96 overflow-y-auto"
+          >
+            <li><button onclick="setTheme('luxury')">Luxury</button></li>
+            <li><button onclick="setTheme('forest')">Forest</button></li>
+            <li><button onclick="setTheme('retro')">Retro</button></li>
+            <li><button onclick="setTheme('coffee')">Coffee</button></li>
+            <li><button onclick="setTheme('cupcake')">Caramellatte</button></li>
+            <li><button onclick="setTheme('autumn')">Autumn</button></li>
+            <li><button onclick="setTheme('lemonade')">Lemonade</button></li>
+          </ul>
+        </div>
+        <button
+          class="btn btn-primary rounded-full px-8 hidden md:flex font-bold"
+        >
+          Contact Artisan
+        </button>
+      </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto">
+      <!-- Bento Grid Structure -->
+      <div
+        class="grid grid-cols-1 md:grid-cols-4 grid-rows-none md:grid-rows-6 gap-6 h-auto md:h-[1000px]"
+      >
+        <!-- Main Display Image (Large Card) -->
+        <div
+          class="md:col-span-2 md:row-span-4 bento-card card bg-base-100 overflow-hidden group border border-base-300"
+        >
+          <figure class="w-full h-full relative">
+            <img
+              id="mainImg"
+              src="assets/images/chair.png"
+              class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+            />
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-base-100/50 to-transparent"
+            ></div>
+            <div class="absolute bottom-6 left-6 flex gap-2">
+              <span class="badge badge-primary font-bold">HANDMADE</span>
+              <span
+                class="badge badge-outline bg-base-100/50 backdrop-blur font-bold border-none"
+                >TOP RATED</span
+              >
+            </div>
+          </figure>
+        </div>
+
+        <!-- Header Info Card -->
+        <div
+          class="md:col-span-2 md:row-span-2 bento-card card bg-base-100 p-8 justify-center border border-base-300"
+        >
+          <div class="space-y-4">
+            <h1
+              class="text-4xl lg:text-5xl font-black bento-font tracking-tighter leading-none"
+            >
+              Artisan Pro <br /><span class="text-primary italic"
+                >Ergonomic</span
+              >
+            </h1>
+            <div class="flex items-center gap-4">
+              <div class="text-3xl font-bold opacity-80">$499</div>
+              <div class="rating rating-sm">
+                <input
+                  type="radio"
+                  class="mask mask-star-2 bg-orange-400"
+                  checked
+                />
+                <input
+                  type="radio"
+                  class="mask mask-star-2 bg-orange-400"
+                  checked
+                />
+                <input
+                  type="radio"
+                  class="mask mask-star-2 bg-orange-400"
+                  checked
+                />
+                <input
+                  type="radio"
+                  class="mask mask-star-2 bg-orange-400"
+                  checked
+                />
+                <input
+                  type="radio"
+                  class="mask mask-star-2 bg-orange-400"
+                  checked
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats/Specs Grid in Bento -->
+        <div
+          class="md:col-span-1 md:row-span-2 bento-card card bg-base-100 p-6 flex flex-col justify-between border border-base-300"
+        >
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 bg-info/20 text-info rounded-xl flex items-center justify-center"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </div>
+            <span class="text-xs font-bold opacity-40 uppercase">Material</span>
+          </div>
+          <div class="text-xl font-bold bento-font">Solid Oak Wood</div>
+        </div>
+
+        <div
+          class="md:col-span-1 md:row-span-2 bento-card card bg-base-100 p-6 flex flex-col justify-between border border-base-300"
+        >
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 bg-success/20 text-success rounded-xl flex items-center justify-center"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </div>
+            <span class="text-xs font-bold opacity-40 uppercase">Origin</span>
+          </div>
+          <div class="text-xl font-bold bento-font">Copenhagen</div>
+        </div>
+
+        <!-- Interactive Gallery Bento Card -->
+        <div
+          class="md:col-span-2 md:row-span-2 bento-card card bg-base-100 p-4 border border-base-300 overflow-hidden"
+        >
+          <div class="text-xs font-bold opacity-40 uppercase mb-4 px-2">
+            Gallery Explorer
+          </div>
+          <div class="grid grid-cols-4 gap-4 h-full">
+            <div
+              onclick="switchImg(this, 'chair')"
+              class="rounded-2xl overflow-hidden cursor-pointer gallery-active"
+            >
+              <img
+                src="assets/images/chair.png"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <div
+              onclick="switchImg(this, 'lamp')"
+              class="rounded-2xl overflow-hidden cursor-pointer border border-base-200 opacity-60 hover:opacity-100 transition-all"
+            >
+              <img
+                src="assets/images/lamp.png"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <div
+              onclick="switchImg(this, 'stool')"
+              class="rounded-2xl overflow-hidden cursor-pointer border border-base-200 opacity-60 hover:opacity-100 transition-all"
+            >
+              <img
+                src="assets/images/stool.png"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <div
+              onclick="switchImg(this, 'table')"
+              class="rounded-2xl overflow-hidden cursor-pointer border border-base-200 opacity-60 hover:opacity-100 transition-all"
+            >
+              <img
+                src="assets/images/table.png"
+                class="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Actions Bento Card (Wide) -->
+        <div
+          class="md:col-span-2 md:row-span-2 bento-card card bg-primary text-primary-content p-8 flex flex-row items-center justify-between border-none shadow-2xl"
+        >
+          <div class="space-y-4 max-w-[60%]">
+            <h3
+              class="text-3xl font-black bento-font leading-none tracking-tight"
+            >
+              Ready to upgrade?
+            </h3>
+            <p class="text-sm opacity-80">
+              Lifetime warranty and carbon-neutral shipping included.
+            </p>
+          </div>
+          <button
+            class="btn btn-lg bg-base-100 text-primary hover:bg-base-200 border-none px-12 rounded-2xl font-black text-xl"
+          >
+            BUY NOW
+          </button>
+        </div>
+
+        <!-- Description/Reviews Card -->
+        <div
+          class="md:col-span-1 md:row-span-2 bento-card card bg-base-100 p-6 border border-base-300"
+        >
+          <div class="text-xs font-bold opacity-40 uppercase mb-4">Reviews</div>
+          <div class="stack w-full">
+            <div class="card bg-base-200 p-4 rounded-2xl">
+              <p class="text-sm italic">
+                "The most comfortable chair I've ever owned."
+              </p>
+              <p class="text-xs font-bold mt-2 opacity-50">— Alex R.</p>
+            </div>
+            <div class="card bg-base-300 p-4 rounded-2xl">
+              <p class="text-sm italic">"Perfect for long sessions."</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Social/Share Card -->
+        <div
+          class="md:col-span-1 md:row-span-2 bento-card card bg-base-100 p-6 flex flex-col items-center justify-center gap-4 border border-base-300"
+        >
+          <div class="flex gap-4">
+            <button class="btn btn-circle btn-ghost">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"
+                />
+              </svg>
+            </button>
+            <button class="btn btn-circle btn-ghost">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+                />
+              </svg>
+            </button>
+          </div>
+          <div class="text-xs font-bold opacity-30 uppercase">Show it off</div>
+        </div>
+      </div>
+    </main>
+
+    <footer
+      class="mt-20 py-10 text-center max-w-7xl mx-auto border-t border-base-300"
+    >
+      <p
+        class="text-xs font-bold bento-font opacity-20 uppercase tracking-widest"
+      >
+        Handcrafted in Denmark / 2026 / MKT.PRO
+      </p>
+    </footer>
+
+    <script>
+      function switchImg(el, name) {
+        document.getElementById("mainImg").src = `assets/images/${name}.png`;
+        document.querySelectorAll(".gallery-active").forEach((item) => {
+          item.classList.remove("gallery-active");
+          item.classList.add("opacity-60", "border", "border-base-200");
+        });
+        el.classList.add("gallery-active");
+        el.classList.remove("opacity-60", "border", "border-base-200");
+      }
+
+      function setTheme(theme) {
+        document.documentElement.setAttribute("data-theme", theme);
+        localStorage.setItem("layout4_theme", theme);
+      }
+
+      // Init
+      const saved = localStorage.getItem("layout4_theme");
+      if (saved) setTheme(saved);
+    </script>
+  </body>
+</html>

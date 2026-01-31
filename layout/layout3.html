@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="en" data-theme="luxury">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Artisan Shop | Interactive Explorer</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- DaisyUI CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@4.4.19/dist/full.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/theme-change@2.0.2/index.js"
+      rel="script"
+    />
+    <!-- Google Fonts: Inter & Playfair Display -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+      .title-font {
+        font-family: "Playfair Display", serif;
+      }
+      .gallery-thumb.active {
+        border-color: oklch(var(--p));
+        opacity: 1;
+        transform: scale(1.05);
+      }
+      .gallery-thumb {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .tab-content {
+        display: none;
+      }
+      .tab-content.active {
+        display: block;
+        animation: fadeIn 0.4s ease-out;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body class="min-h-screen bg-base-200/50">
+    <!-- Navbar with Theme Switcher -->
+    <div
+      class="navbar bg-base-100 shadow-md sticky top-0 z-[100] px-4 lg:px-12"
+    >
+      <div class="flex-1">
+        <a class="btn btn-ghost text-xl italic title-font tracking-tight"
+          >Artisan.Studio</a
+        >
+      </div>
+      <div class="flex-none gap-4">
+        <!-- Theme Selector -->
+        <div class="dropdown dropdown-end">
+          <div
+            tabindex="0"
+            role="button"
+            class="btn btn-outline btn-sm lg:btn-md m-1"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 mr-2"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.172-1.172a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+              />
+            </svg>
+            <span class="hidden sm:inline">Theme</span>
+          </div>
+          <ul
+            tabindex="0"
+            class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 max-h-96 overflow-y-auto"
+          >
+            <li><button data-set-theme="luxury">Luxury</button></li>
+            <li><button data-set-theme="forest">Forest</button></li>
+            <li><button data-set-theme="retro">Retro</button></li>
+            <li><button data-set-theme="coffee">Coffee</button></li>
+            <li>
+              <button data-set-theme="cupcake">Caramellatte (Cupcake)</button>
+            </li>
+            <li><button data-set-theme="autumn">Autumn</button></li>
+            <li><button data-set-theme="lemonade">Lemonade</button></li>
+            <li><button data-set-theme="dim">Dim</button></li>
+            <li><button data-set-theme="nord">Nord</button></li>
+            <li><button data-set-theme="business">Business</button></li>
+          </ul>
+        </div>
+
+        <div class="dropdown dropdown-end">
+          <div
+            tabindex="0"
+            role="button"
+            class="btn btn-ghost btn-circle avatar"
+          >
+            <div class="w-10 rounded-full ring ring-primary">
+              <img
+                src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <main class="container mx-auto px-4 py-8 lg:py-16">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        <!-- Left: Interactive Gallery -->
+        <div class="space-y-6 sticky top-24">
+          <div
+            class="relative group rounded-3xl overflow-hidden shadow-2xl bg-base-100 border border-base-300"
+          >
+            <img
+              id="mainImage"
+              src="assets/images/chair.png"
+              class="w-full h-[500px] object-cover transition-transform duration-500 group-hover:scale-110"
+            />
+            <div class="absolute top-4 right-4 flex flex-col gap-2">
+              <button
+                class="btn btn-circle btn-sm btn-ghost bg-base-100/50 backdrop-blur"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="flex gap-4 justify-center">
+            <img
+              onclick="changeImage(this, 'chair')"
+              src="assets/images/chair.png"
+              class="gallery-thumb active w-20 h-20 object-cover rounded-xl border-4 cursor-pointer opacity-70 hover:opacity-100"
+            />
+            <img
+              onclick="changeImage(this, 'lamp')"
+              src="assets/images/lamp.png"
+              class="gallery-thumb w-20 h-20 object-cover rounded-xl border-4 border-transparent cursor-pointer opacity-70 hover:opacity-100"
+            />
+            <img
+              onclick="changeImage(this, 'stool')"
+              src="assets/images/stool.png"
+              class="gallery-thumb w-20 h-20 object-cover rounded-xl border-4 border-transparent cursor-pointer opacity-70 hover:opacity-100"
+            />
+            <img
+              onclick="changeImage(this, 'table')"
+              src="assets/images/table.png"
+              class="gallery-thumb w-20 h-20 object-cover rounded-xl border-4 border-transparent cursor-pointer opacity-70 hover:opacity-100"
+            />
+          </div>
+        </div>
+
+        <!-- Right: Product Info & Tabs -->
+        <div class="space-y-8">
+          <div class="space-y-4">
+            <div
+              class="text-sm font-bold uppercase tracking-widest text-primary"
+            >
+              Handcrafted Series
+            </div>
+            <h1 class="text-4xl lg:text-6xl font-black title-font">
+              Artisan Pro Chair
+            </h1>
+            <div class="flex items-center gap-6">
+              <div class="text-3xl font-bold opacity-80">$499.00</div>
+              <div class="badge badge-success gap-2 py-3 px-4 font-bold">
+                In Stock
+              </div>
+            </div>
+          </div>
+
+          <!-- Tabs -->
+          <div role="tablist" class="tabs tabs-lifted tabs-lg">
+            <input
+              type="radio"
+              name="product_tabs"
+              role="tab"
+              class="tab font-bold"
+              aria-label="Overview"
+              checked
+            />
+            <div
+              role="tabpanel"
+              class="tab-content bg-base-100 border-base-300 rounded-box p-8 space-y-4"
+            >
+              <h3 class="text-xl font-bold">Pure Craftsmanship</h3>
+              <p class="leading-relaxed opacity-70">
+                Experience the merge of nature and ergonomics. Every chair is
+                carved by hand in our Danish workshop using century-old
+                techniques and sustainable solid oak.
+              </p>
+              <ul class="grid grid-cols-2 gap-4 text-sm mt-4">
+                <li class="flex items-center gap-2">
+                  <svg
+                    class="w-4 h-4 text-success"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    />
+                  </svg>
+                  Solid Oak Frame
+                </li>
+                <li class="flex items-center gap-2">
+                  <svg
+                    class="w-4 h-4 text-success"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    />
+                  </svg>
+                  Recycled Fabric
+                </li>
+                <li class="flex items-center gap-2">
+                  <svg
+                    class="w-4 h-4 text-success"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    />
+                  </svg>
+                  Breathable Foam
+                </li>
+                <li class="flex items-center gap-2">
+                  <svg
+                    class="w-4 h-4 text-success"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    />
+                  </svg>
+                  Lifetime Support
+                </li>
+              </ul>
+            </div>
+
+            <input
+              type="radio"
+              name="product_tabs"
+              role="tab"
+              class="tab font-bold"
+              aria-label="Details"
+            />
+            <div
+              role="tabpanel"
+              class="tab-content bg-base-100 border-base-300 rounded-box p-8"
+            >
+              <table class="table w-full">
+                <tbody>
+                  <tr>
+                    <th class="opacity-60">Dimensions</th>
+                    <td>85cm H x 55cm W x 60cm D</td>
+                  </tr>
+                  <tr>
+                    <th class="opacity-60">Weight Capacity</th>
+                    <td>150 kg</td>
+                  </tr>
+                  <tr>
+                    <th class="opacity-60">Assembly</th>
+                    <td>Fully Assembled</td>
+                  </tr>
+                  <tr>
+                    <th class="opacity-60">Certification</th>
+                    <td>FSC Certified Wood</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <input
+              type="radio"
+              name="product_tabs"
+              role="tab"
+              class="tab font-bold"
+              aria-label="Reviews"
+            />
+            <div
+              role="tabpanel"
+              class="tab-content bg-base-100 border-base-300 rounded-box p-8 space-y-4"
+            >
+              <div class="chat chat-start">
+                <div class="chat-image avatar">
+                  <div class="w-10 rounded-full">
+                    <img
+                      src="https://api.dicebear.com/7.x/personas/svg?seed=A"
+                    />
+                  </div>
+                </div>
+                <div class="chat-bubble font-medium">
+                  The build quality is insane! Worth every penny.
+                </div>
+              </div>
+              <div class="chat chat-start">
+                <div class="chat-image avatar">
+                  <div class="w-10 rounded-full">
+                    <img
+                      src="https://api.dicebear.com/7.x/personas/svg?seed=B"
+                    />
+                  </div>
+                </div>
+                <div class="chat-bubble font-medium">
+                  Changed my home office completely. So comfy.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div class="flex flex-col sm:flex-row gap-4 pt-6">
+            <button
+              class="btn btn-primary btn-lg flex-1 shadow-2xl shadow-primary/30 rounded-2xl hover:scale-[1.02] transition-transform"
+            >
+              Add to Workspace
+            </button>
+            <button class="btn btn-outline btn-lg rounded-2xl px-10">
+              Ask Expert
+            </button>
+          </div>
+
+          <!-- Mobile Benefits Alert -->
+          <div
+            class="alert bg-base-100 border-base-300 border-dotted border-2 p-6 rounded-3xl"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              class="stroke-info shrink-0 w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              ></path>
+            </svg>
+            <span class="text-sm font-medium"
+              >Carbon Neutral shipping included on this handcrafted item.</span
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- Carousel for Related items -->
+      <div class="mt-24 space-y-10">
+        <h2
+          class="text-3xl font-black title-font border-l-4 border-primary pl-6"
+        >
+          Complete the Collection
+        </h2>
+        <div
+          class="carousel carousel-center max-w-full p-4 space-x-6 bg-base-100 rounded-box shadow-inner"
+        >
+          <div class="carousel-item flex-col group">
+            <img
+              src="assets/images/lamp.png"
+              class="rounded-box w-64 h-64 object-cover group-hover:scale-105 transition-transform"
+            />
+            <div class="mt-4 px-2">
+              <h3 class="font-bold">Lumina Lamp</h3>
+              <p class="text-sm opacity-60">$129</p>
+            </div>
+          </div>
+          <div class="carousel-item flex-col group">
+            <img
+              src="assets/images/stool.png"
+              class="rounded-box w-64 h-64 object-cover group-hover:scale-105 transition-transform"
+            />
+            <div class="mt-4 px-2">
+              <h3 class="font-bold">Artisan Stool</h3>
+              <p class="text-sm opacity-60">$185</p>
+            </div>
+          </div>
+          <div class="carousel-item flex-col group">
+            <img
+              src="assets/images/table.png"
+              class="rounded-box w-64 h-64 object-cover group-hover:scale-105 transition-transform"
+            />
+            <div class="mt-4 px-2">
+              <h3 class="font-bold">Oak Side Table</h3>
+              <p class="text-sm opacity-60">$320</p>
+            </div>
+          </div>
+          <div
+            class="carousel-item w-64 h-64 flex items-center justify-center border-2 border-dashed border-base-300 rounded-box"
+          >
+            <a class="link link-primary font-bold">See more →</a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer p-10 bg-base-300 text-base-content mt-20">
+      <aside>
+        <span class="text-3xl italic title-font">Artisan.</span>
+        <p>
+          Providing quality craftmanship since 1994.<br />Sustainable, Handmade,
+          Beautiful.
+        </p>
+      </aside>
+      <nav>
+        <h6 class="footer-title">Services</h6>
+        <a class="link link-hover">Branding</a>
+        <a class="link link-hover">Design</a>
+        <a class="link link-hover">Marketing</a>
+        <a class="link link-hover">Advertisement</a>
+      </nav>
+      <nav>
+        <h6 class="footer-title">Company</h6>
+        <a class="link link-hover">About us</a>
+        <a class="link link-hover">Contact</a>
+        <a class="link link-hover">Jobs</a>
+        <a class="link link-hover">Press kit</a>
+      </nav>
+      <nav>
+        <h6 class="footer-title">Legal</h6>
+        <a class="link link-hover">Terms of use</a>
+        <a class="link link-hover">Privacy policy</a>
+        <a class="link link-hover">Cookie policy</a>
+      </nav>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+      // Simple Gallery Switcher
+      function changeImage(el, name) {
+        const mainImg = document.getElementById("mainImage");
+        mainImg.src = `assets/images/${name}.png`;
+
+        // Toggle active state
+        document
+          .querySelectorAll(".gallery-thumb")
+          .forEach((t) => t.classList.remove("active", "border-primary"));
+        el.classList.add("active", "border-primary");
+      }
+
+      // Theme Switcher Logic (Simple implementation without theme-change library for demo)
+      document.querySelectorAll("[data-set-theme]").forEach((btn) => {
+        btn.addEventListener("click", function () {
+          const theme = this.getAttribute("data-set-theme");
+          document.documentElement.setAttribute("data-theme", theme);
+          localStorage.setItem("theme", theme);
+        });
+      });
+
+      // Load saved theme
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme) {
+        document.documentElement.setAttribute("data-theme", savedTheme);
+      }
+    </script>
+  </body>
+</html>
